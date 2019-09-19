@@ -1,5 +1,6 @@
 import * as WebBrowser from "expo-web-browser";
 import React from "react";
+import NavigationBar from "react-native-navbar";
 import {
   Image,
   Platform,
@@ -19,6 +20,8 @@ export default function HomeScreen() {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
+        <NavigationBar title={titleConfig} rightButton={rightButtonConfig} />
+
         <View style={styles.welcomeContainer}>
           <Image
             source={
@@ -34,7 +37,7 @@ export default function HomeScreen() {
           <Text style={styles.getStartedText}>meet in the midl</Text>
         </View>
 
-        <View style={styles.helpContainer}></View>
+        <View style={styles.mapContainer}></View>
       </ScrollView>
 
       <View style={styles.tabBarInfoContainer}>
@@ -181,3 +184,12 @@ const styles = StyleSheet.create({
     color: "#2e78b7"
   }
 });
+
+const rightButtonConfig = {
+  title: "Next",
+  handler: () => alert("hello!")
+};
+
+const titleConfig = {
+  title: "'sup homie'"
+};
