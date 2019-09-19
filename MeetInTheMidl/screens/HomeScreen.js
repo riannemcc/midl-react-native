@@ -1,6 +1,7 @@
 import * as WebBrowser from "expo-web-browser";
 import React from "react";
-import NavigationBar from "react-native-navbar";
+import MapView from "react-native-maps";
+import FetchLocation from "../components/FetchLocation";
 import {
   Image,
   Platform,
@@ -14,14 +15,22 @@ import {
 import { MonoText } from "../components/StyledText";
 
 export default function HomeScreen() {
+  getUserLocationHandler = () => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        console.log(position);
+      },
+      err => console.log(error)
+    );
+  };
   return (
     <View style={styles.container}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
-        <NavigationBar title={titleConfig} rightButton={rightButtonConfig} />
-
+        <FetchLocation onGetLocation={this.getUserLocationHandler} />
+        <MapView style={{ flex: 1 }} />
         <View style={styles.welcomeContainer}>
           <Image
             source={
@@ -32,11 +41,9 @@ export default function HomeScreen() {
             style={styles.welcomeImage}
           />
         </View>
-
         <View style={styles.getStartedContainer}>
           <Text style={styles.getStartedText}>meet in the midl</Text>
         </View>
-
         <View style={styles.mapContainer}></View>
       </ScrollView>
 
@@ -185,11 +192,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const rightButtonConfig = {
-  title: "Next",
-  handler: () => alert("hello!")
-};
-
-const titleConfig = {
-  title: "'sup homie'"
-};
+// const rightButtonConfig = {
+//   title: "Next",
+//   handler: () => alert("hello!")
+// };
+//
+// const titleConfig = {
+//   title: "'sup homie'"
+// };
